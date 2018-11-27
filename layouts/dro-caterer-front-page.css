@@ -1,0 +1,124 @@
+/*
+ * Theme Name: dro web trader
+ *
+ * Layout: Dro-Caterer-OnePage
+ *
+ * The CSS stylesheet for the Front Page.
+ * The <body> has a class .dro-caterer-front-page( Filter body_class  in inc/template-functions.php),
+ * so we use it to prevent overriding the default elements style.
+ *
+ * Learn more: https://developer.wordpress.org/themes/basics/template-files/
+*/
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Typography
+# Elements
+# Forms
+# Navigation
+        ## Links
+        ## Menus
+# Accessibility
+# Header
+# Media
+        ## Captions
+        ## Galleries
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Elements
+--------------------------------------------------------------*/
+body.dro-caterer-front-page{ 
+
+}
+
+.dro-caterer-front-page .content-area {
+    background: #fff;
+    background: hsl(0, 0%, 100%);
+}
+.dro-caterer-front-page section.element{
+    /*height: calc(100vh - 45px);*/
+    padding: 5rem 0;
+    text-align: center
+
+}
+/* Colors */
+.dro-caterer-brown{background-color: #9e2520}
+.dro-caterer-cyan{background-color:  #7ac1b7}
+.dro-caterer-orange{background-color: #fdb84e}
+
+.dro-caterer-front-page #call-to-action {
+    color: #fff;
+    background: linear-gradient(to bottom, #144566 0%,#242b33 100%);
+}
+.dro-caterer-front-page #services{
+    color: #fff;
+    background: linear-gradient(to bottom, #9e2520 0%,#9e362f 100%);
+}
+@media screen and (max-width:992px){
+    /*    .dro-caterer-front-page section.element{
+            padding: 0;
+        }*/
+}
+/*--------------------------------------------------------------
+# Forms
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Navigation
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Links
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+## Menus
+--------------------------------------------------------------*/
+
+.dro-caterer-front-page .navbar{
+    padding: 0;
+}
+.dro-caterer-front-page .navbar-inner{
+    background: #fff;
+    background-color: #222;
+    filter: none;
+    margin: 0 auto;
+    width: 100%;
+}
+.dro-caterer-front-page .navbar .brand {
+    padding: 15px 0;
+    margin-left: 0;
+}
+.dro-caterer-front-page .front-page-navigation{
+    position: relative;
+    background-color: #222;
+    width: 100%;
+    float: left;
+    clear: both;
+}
+.dro-caterer-front-page ul.dro-caterer-front-page-nav-menu{
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+}
+.dro-caterer-front-page ul.dro-caterer-front-page-nav-menu li{
+    display: inline;
+    float: left;
+}
+.dro-caterer-front-page ul.dro-caterer-front-page-nav-menu li a{
+    color: #fdb84e;
+    display: block;
+    padding: 1em .8em;
+    /*border: 1px solid #f00;*/
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.dro-caterer-front-page ul.dro-caterer-front-page-nav-menu li a:hover{
+    background-color: #7ac1b7;
+    color: #fff;
+}
+
+

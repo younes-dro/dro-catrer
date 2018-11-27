@@ -663,15 +663,15 @@ a:hover, a:active {
     position: relative;
     float: right;
     width: 100%;
-    display: block;
+    display: none;
     clear: both;
     font-family:  sans-serif;
     text-transform: uppercase;
-    background: hsla(0, 0%, 0%, 0.8);
+    background: hsla(0, 0%, 0%, 0.60);
+    
 }
 
 .main-navigation ul {
-    display: none;
     list-style: none;
     margin: 0;
     padding-left: 0;
@@ -727,6 +727,7 @@ a:hover, a:active {
     background: #7ac1b7;
 }
 .main-navigation ul ul a:hover {
+
 }
 .main-navigation .current_page_item > a,
 .main-navigation .current-menu-item > a,
@@ -746,17 +747,12 @@ a:hover, a:active {
     color: #313131;
     background: #7ac1b7;
 }
-/* Small menu. */
-.menu-toggle,
-.main-navigation.toggled ul {
-    display: block;
-}
 
-@media screen and (min-width:768px) {
-    .menu-toggle {
-        display: none;
-    }
-    .main-navigation ul {
+
+@media screen and (min-width:992px) {
+
+    .main-navigation,
+    .main-navigation ul{
         display: block;
     }
 }
@@ -881,6 +877,10 @@ a:hover, a:active {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
+.site-header{
+    /*border: 1px solid #0F0;*/
+    position: relative;
+}
 .header-image img{
     display: block;
     margin: 0 auto;
@@ -888,7 +888,7 @@ a:hover, a:active {
 .site-branding{
     text-align: center;
     margin: 0 auto;
-    padding: 2rem 0 0 0;
+    padding: 6rem 0 0 0;
     background-color: #fff;
 
 }
@@ -898,9 +898,11 @@ a:hover, a:active {
     background-size: cover!important;
     -moz-background-size: cover!important;
     -webkit-background-size: cover!important;
+    height: 90vh;
+    object-fit: cover;
 }
 .header-background-image .title-box{
-    background-color: hsla(172, 36%, 62%, 0.8);
+    background-color: hsla(0, 0%, 100%, 0.6);
 }
 .title-box{
     border: 1px solid #F00;
@@ -935,7 +937,8 @@ p.site-description{
     position: absolute;
     top: 0px;
     max-width: 50px;
-    height: auto;    
+    height: auto;
+    transition: all 1s;
 }
 
 @media screen and (max-width: 575px){
@@ -955,12 +958,12 @@ p.site-description{
     }
     .custom-logo-link{
         top: 0;
-        max-width: 80px;
+        max-width: 150px;
         height: auto;
-        left: 2rem;
+        left: 0;
     }
 }
-@media screen and (min-width: 992){
+@media screen and (min-width: 992px){
     .site-branding{
         padding: 5rem 0;
     }
@@ -973,6 +976,9 @@ p.site-description{
     }
     p.site-description{
         font-size: 2.5rem;
+    }
+    .custom-logo-link{
+        top: 50px;
     }
 }
 
