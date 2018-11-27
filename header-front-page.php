@@ -13,6 +13,9 @@
  */
 global $dro_caterer_frontpage;
 $dro_caterer_frontpage = new dro_caterer_frontpage(get_the_ID());
+//var_dump($dro_caterer_frontpage);
+if($dro_caterer_frontpage->has_child === 0)
+    echo "Page without children ";
 
 ?>
 <!doctype html>

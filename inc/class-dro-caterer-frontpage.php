@@ -17,6 +17,12 @@ class dro_caterer_frontpage {
     public $parent_page;
 
     /**
+     *
+     * @var boolean 
+     */
+    public $has_child;
+
+    /**
      * 
      * @var array 
      */
@@ -65,18 +71,18 @@ class dro_caterer_frontpage {
         
         $this->parent_page = $id;
         $this->_get_pages();
-        
-//        get_pages
+        $this->_has_child();
     }
 
     /**
-     * 
-     * @param int $id
-     * @return boolean
+     * Verfiy if the front page had a children pages or not
+     * minimum one child 
+     *
+     * @return int 
      */
-    private function _has_child($id) {
-        
-        return get_pages(array('child_of' => $id));
+    private function _has_child() {
+
+        return $this->has_child = count($this->pages);
     }
 
     /**
@@ -86,9 +92,7 @@ class dro_caterer_frontpage {
     private function _get_pages() {
         $this->pages = get_pages(array(
             'child_of' => $this->parent_page,
-//            'hierarchical' => FALSE
-            ));
-        
+        ));
     }
 
     /**
