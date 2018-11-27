@@ -91,7 +91,8 @@ class dro_caterer_frontpage {
      */
     private function _get_pages() {
         $this->pages = get_pages(array(
-            'child_of' => $this->parent_page,
+            'child_of'  => $this->parent_page,
+            'parent'    => $this->parent_page
         ));
     }
 

@@ -41,14 +41,11 @@ if($dro_caterer_frontpage->has_child === 0)
                     <div class="navbar navbar-inverse navbar-fixed-top">
                         <div class="navbar-inner">
                             <div class="<?php echo $bootstrap_container ?>">
-<!--                                <div class="brand">
-                                    <a href=""><img src=""></a>
-                                </div>-->
-                                <nav id="site-navigation" class="front-page-navigation" role="navigation">
+                                <nav id="site-navigation" class="main-navigation" role="navigation">
                                     <!-- The navigation menu will be placed here using javascript -->
                                     <?php
                                     $menu_attributes = array(
-                                        'menu_class' => 'dro-caterer-front-page-nav-menu'
+                                        'menu_class' => 'menu'
                                     );
                                     $dro_caterer_frontpage->frontpage_nav_menu($menu_attributes);
                                     ?>
