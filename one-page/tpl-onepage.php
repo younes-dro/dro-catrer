@@ -1,13 +1,14 @@
 <?php
 
 /*
- * Template Name: caterer one page
+ * Template Name: caterer One Page
  *
  * @package dro_caterer
  */
-//get_header('one-page/header-onepage');
+//get_header('one-page/header-onepage.php');
 require get_template_directory().'/one-page/header-onepage.php';
 ?>
+<div class="container-fluid">
 <div class="row">
 
     <div class="col-12">
@@ -23,7 +24,7 @@ require get_template_directory().'/one-page/header-onepage.php';
         </div><!-- #primary -->
     </div><!-- .col-12 -->
 </div><!-- .row -->
-
+</div>
 <?php
 get_footer();
 

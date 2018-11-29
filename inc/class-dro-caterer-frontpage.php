@@ -68,14 +68,14 @@ class dro_caterer_frontpage {
      * @param int $id The ID of the parent page.
      */
     public function __construct($id) {
-        
+
         $this->parent_page = $id;
         $this->_get_pages();
         $this->_has_child();
     }
 
     /**
-     * Verfiy if the front page had a children pages or not
+     * Verfiy if the main page has a children pages or not
      * minimum one child 
      *
      * @return int 
@@ -91,8 +91,8 @@ class dro_caterer_frontpage {
      */
     private function _get_pages() {
         $this->pages = get_pages(array(
-            'child_of'  => $this->parent_page,
-            'parent'    => $this->parent_page
+            'child_of' => $this->parent_page,
+            'parent' => $this->parent_page
         ));
     }
 
@@ -118,16 +118,6 @@ class dro_caterer_frontpage {
     }
 
     /**
-     * Display the navigation menu for the Front Page
-     * 
-     * @param array $menu_attributes The menu parameters.
-     */
-    public function frontpage_nav_menu($menu_attributes = array()) {
-        $this->menu_attributes = $this->_merge_menu_attributes($this->menu_attributes, $menu_attributes);
-        echo $this->_construct_menu($this->pages);
-    }
-
-    /**
      * 
      * @param array $pages
      * 
@@ -149,6 +139,16 @@ class dro_caterer_frontpage {
     }
 
     /**
+     * Display the navigation menu for the Front Page
+     * 
+     * @param array $menu_attributes The menu parameters.
+     */
+    public function frontpage_nav_menu($menu_attributes = array()) {
+        $this->menu_attributes = $this->_merge_menu_attributes($this->menu_attributes, $menu_attributes);
+        echo $this->_construct_menu($this->pages);
+    }
+
+    /**
      * Display the content for the Front Page
      */
     public function frontpage_content() {
@@ -156,24 +156,76 @@ class dro_caterer_frontpage {
         echo $this->_construct_content($this->pages);
     }
 
+    /**
+     * 
+     * @param array $pages
+     * @return string
+     */
     private function _construct_content(array $pages) {
 
         foreach ($pages as $key => $value) {
-            $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element">'
-                    . '<div class="container">'
-                    . '<div class="row">'
-                    . '<div class="col-lg-3">'
-                    . '<div class="entry-title">' . $pages[$key]->post_title . '</div>'
-                    . '</div><!-- .col-lg-3 -->'
-                    . '<div class="col-lg-9">'
-                    . ' <div class="entry-content">' . $pages[$key]->post_content . '</div>'
-                    . '</div>'
-                    . '</div><!-- .row -->'
-                    . '</div><!-- .content-fluid -->';
-            $this->content .='</section>';
+            // The child page has a children too 
+            if ($this->_subpage_has_child($pages[$key]->ID) > 0) {
+                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element">'
+                        . '<div class="container-fluid">'
+                        . '<div class="row">'
+                        . '<div class="col-lg-12">'
+                        . '<div class="entry-title">' . $pages[$key]->post_title . '</div>'
+                        . ' <div class="entry-content">' . $pages[$key]->post_content . '</div>'
+                        . '</div>'
+                        . '<div class="col-lg-12">'
+                        . '<div class="row justify-content-center">'
+                        . $this->_subpage_content($pages[$key]->ID, $this->_subpage_has_child($pages[$key]->ID))
+                        . '</div><!-- .row (child ) -->'
+                        . '</div><!-- .col-lg-12 (child) -->'
+                        . '</div><!-- .row (parent) -->'
+                        . '</div><!-- .content-fluid (parent) -->';
+                $this->content .='</section>';
+            } else {
+                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element">'
+                        . '<div class="container-fluid">'
+                        . '<div class="row">'
+                        . '<div class="col-lg-3">'
+                        . '<div class="entry-title">' . $pages[$key]->post_title . '</div>'
+                        . '</div>'
+                        . '<div class="col-lg-9">'
+                        . ' <div class="entry-content">' . $pages[$key]->post_content . '</div>'
+                        . '</div>'
+                        . '</div><!-- .row -->'
+                        . '</div><!-- .content-fluid -->';
+                $this->content .='</section>';
+            }
         }
 
         return $this->content;
+    }
+
+    /**
+     * Verfy if a child page has children too
+     * @param int $id
+     */
+    private function _subpage_has_child($id) {
+        return count(get_pages(array(
+            'child_of' => $id,
+            'parent' => $id
+        )));
+    }
+
+    /**
+     *  retreive the content of the subpages  only the first level elements
+     * @param int $id
+     * @param int $number_subpage The number of the subpage 
+     */
+    private function _subpage_content($id, $number_subpage) {
+        $out = '';
+        $subpages = get_pages(array(
+            'child_of' => $id,
+            'parent' => $id
+        ));
+        foreach ($subpages as $key => $value) {
+            $out .= '<div class="col-md-6 col-lg-4"><h1>' . $subpages[$key]->post_title . '</h1></div>';
+        }
+        return $out;
     }
 
 }

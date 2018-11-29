@@ -8,15 +8,12 @@
  *
  * @package dro_caterer
  */
-
-
- // Create the Front Page Object 
+// Create the Front Page Object 
 global $dro_caterer_frontpage;
 $dro_caterer_frontpage = new dro_caterer_frontpage(get_the_ID());
 //var_dump($dro_caterer_frontpage);
-if($dro_caterer_frontpage->has_child === 0)
+if ($dro_caterer_frontpage->has_child === 0)
     echo "Page without children ";
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -30,30 +27,28 @@ if($dro_caterer_frontpage->has_child === 0)
 
     <body <?php body_class(); ?>>
         <div id="page" class="site">
-            <?php
-            global $bootstrap_container;
-            $bootstrap_container = (dro_caterer_get_option('dro_caterer_full_width_status')) ? "container-fluid" : "container";
-            ?>
-            <div class="<?php echo $bootstrap_container ?>">
-                <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'dro-caterer'); ?></a>
-                <header id="masthead" class="site-header">
-
-                    <div class="navbar navbar-inverse navbar-fixed-top">
-                        <div class="navbar-inner">
-                            <div class="<?php echo $bootstrap_container ?>">
-                                <nav id="site-navigation" class="main-navigation front-page-navigation" role="navigation">
-                                    <!-- The navigation menu will be placed here using javascript -->
-                                    <?php
-                                    $menu_attributes = array(
-                                        'menu_class' => 'menu'
-                                    );
-                                    $dro_caterer_frontpage->frontpage_nav_menu($menu_attributes);
-                                    ?>
-                                </nav><!-- #site-navigation -->
+            <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'dro-caterer'); ?></a>
+            <header id="masthead" class="site-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="navbar navbar-inverse navbar-fixed-top">
+                                <div class="navbar-inner">
+                                    <nav id="site-navigation" class="main-navigation front-page-navigation" role="navigation">
+                                        <!-- The navigation menu will be placed here using javascript -->
+                                        <?php
+                                        $menu_attributes = array(
+                                            'menu_class' => 'menu'
+                                        );
+                                        $dro_caterer_frontpage->frontpage_nav_menu($menu_attributes);
+                                        ?>
+                                    </nav><!-- #site-navigation -->
+                                </div>
                             </div>
                         </div>
                     </div>
-                </header><!-- #masthead -->
+                </div>
+            </header><!-- #masthead -->
 
 
-                <div id="content" class="site-content">
+            <div id="content" class="site-content">

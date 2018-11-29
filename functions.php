@@ -144,9 +144,9 @@ function dro_caterer_scripts() {
     wp_enqueue_style('dro-caterer-ionicons', get_template_directory_uri() . '/assets/ionicons/css/ionicons.css');
     wp_enqueue_style('dro-caterer-mobile-menu', get_template_directory_uri() . '/layouts/dro-sliding-menu.css');
     wp_enqueue_style('dro-caterer-style', get_stylesheet_uri());
-//    if(is_page_template('tpl-onepage.php')){
-        wp_enqueue_style('dro-caterer-front-page', get_template_directory_uri() . '/layouts/dro-caterer-front-page.css');
-//    }
+    if(is_page_template()){
+        wp_enqueue_style('dro-caterer-one-page-css', get_template_directory_uri() . '/layouts/dro-caterer-one-page.css');
+    }
 
     /**
      * JS
@@ -155,9 +155,9 @@ function dro_caterer_scripts() {
         wp_enqueue_script('dro-caterer-superfish', get_template_directory_uri() . '/js/superfish.js', array('jquery'), '20181014', true);
         wp_enqueue_script('dro-caterer-superfish-settings', get_template_directory_uri() . '/js/superfish-settings.js', array('dro-caterer-superfish'), '20181014', true);
     }
-//    if(is_page_template('caterer one page')){
-        wp_enqueue_script('dro-caterer-front-page-js', get_template_directory_uri() . '/js/dro-caterer-front-page.js', array('jquery','dro-caterer-dro-sliding-menu'), '20181211', true);
-//    }
+    if(is_page_template()){
+        wp_enqueue_script('dro-caterer-one-page-js', get_template_directory_uri() . '/js/dro-caterer-one-page.js', array('jquery','dro-caterer-dro-sliding-menu'), '20181211', true);
+    }
     
     
     wp_enqueue_script('dro-caterer-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20180511', true);

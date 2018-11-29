@@ -24,9 +24,9 @@ if (!function_exists('dro_caterer_body_classes')) {
             $classes[] = 'no-sidebar';
         }
 
-        // Adds a class of dro-caterer-front-page.
-        if (is_front_page()) {
-            $classes[] = 'dro-caterer-front-page';
+        // Adds a class of dro-caterer-one-page when theme is witch to one page style .
+        if (is_page_template()) {
+            $classes[] = 'dro-caterer-one-page';
         }
 
         return $classes;

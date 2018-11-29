@@ -1,0 +1,122 @@
+/*
+ * Theme Name: dro caterer
+ *
+ * Layout: dro-caterer-one-page
+ *
+ * The CSS stylesheet for the Front Page.
+ * The <body> has a class body.dro-caterer-one-page( Filter body_class  in inc/template-functions.php),
+ * so we use it to prevent overriding the default elements style.
+ *
+ * Learn more: https://developer.wordpress.org/themes/basics/template-files/
+*/
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Typography
+# Elements
+# Forms
+# Header
+# Navigation
+        ## Links
+        ## Menus
+
+# Accessibility
+# Media
+        ## Captions
+        ## Galleries
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Elements
+--------------------------------------------------------------*/
+body.dro-caterer-one-page{ 
+
+}
+body.dro-caterer-one-page .col-12{
+    padding: 0;
+}
+body.dro-caterer-one-page .content-area {
+    background: #fff;
+    background: hsl(0, 0%, 100%);
+}
+body.dro-caterer-one-page section.element{
+    height: calc(100vh - 45px);
+    padding: 5rem 0;
+    text-align: center
+
+}
+
+/*--------------------------------------------------------------
+# Forms
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Navigation
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Links
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+## Menus
+--------------------------------------------------------------*/
+#masthead{
+    min-height: 45px;
+}
+@media screen and (min-width: 768px){
+    #toggle-menu-container {
+        width: 100%;
+    }
+}
+@media screen and (min-width: 992px){
+    body.dro-caterer-one-page .navbar{
+        padding: 0;
+    }
+    body.dro-caterer-one-page .navbar-inner{
+        background: #fff;
+        background-color: #222;
+        filter: none;
+        margin: 0 auto;
+        width: 100%;
+    }
+    body.dro-caterer-one-page .navbar .brand {
+        padding: 15px 0;
+        margin-left: 0;
+    }
+    body.dro-caterer-one-page .front-page-navigation{
+        position: relative;
+        background-color: #222;
+        width: 100%;
+        float: left;
+        clear: both;
+    }
+    body.dro-caterer-one-page ul.menu{
+        list-style-type: none;
+        margin: 0;
+        padding-left: 0;
+    }
+    body.dro-caterer-one-page ul.menu li{
+        display: inline;
+        float: left;
+    }
+    body.dro-caterer-one-page ul.menu li a{
+        color: #fdb84e;
+        display: block;
+        padding: 1em .8em;
+        /*border: 1px solid #f00;*/
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    body.dro-caterer-one-page ul.menu li a:hover{
+        background-color: #7ac1b7;
+        color: #fff;
+    }
+}
