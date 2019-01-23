@@ -203,7 +203,7 @@ if (defined('JETPACK__VERSION')) {
  * Load the Front Page Class
  */
 function dro_caterer_class_frontpage() {
-    if (is_front_page()) {
+    if (is_page_template()) {
         require get_template_directory() . '/inc/class-dro-caterer-frontpage.php';
     }
 }

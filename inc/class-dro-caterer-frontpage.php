@@ -67,12 +67,22 @@ class dro_caterer_frontpage {
      * 
      * @param int $id The ID of the parent page.
      */
-    public function __construct($id) {
+    public function __construct($id = '') {
 
         $this->parent_page = $id;
         $this->_get_pages();
         $this->_has_child();
     }
+
+//    static function notice(){
+//        echo '<div class="notice notice-info is-dismissible">'
+//        .'<p>notice dro caterer <p>'
+//        .'</div>';
+//    }
+//    static function display_notice(){
+//        $obj = new dro_caterer_frontpage();
+//        add_action('admin_notices', array($obj, 'notice'));
+//    }
 
     /**
      * Verfiy if the main page has a children pages or not
@@ -170,10 +180,10 @@ class dro_caterer_frontpage {
                         . '<div class="container-fluid">'
                         . '<div class="row">'
                         . '<div class="col-lg-12">'
-                        . '<div class="entry-title">' . $pages[$key]->post_title . '</div>'
-                        . ' <div class="entry-content">' . $pages[$key]->post_content . '</div>'
+                        . '<h1 class="entry-title section-title section-title-has-child">' . $pages[$key]->post_title . '</h1>'
+                        . '<div class="entry-content entry-content-has-child">' . substr($pages[$key]->post_content, 0, 20) . '</div>'
                         . '</div>'
-                        . '<div class="col-lg-12">'
+                        . '<div class="col-lg-12 children-pages">'
                         . '<div class="row justify-content-center">'
                         . $this->_subpage_content($pages[$key]->ID, $this->_subpage_has_child($pages[$key]->ID))
                         . '</div><!-- .row (child ) -->'
@@ -185,11 +195,11 @@ class dro_caterer_frontpage {
                 $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element">'
                         . '<div class="container-fluid">'
                         . '<div class="row">'
-                        . '<div class="col-lg-3">'
-                        . '<div class="entry-title">' . $pages[$key]->post_title . '</div>'
+                        . '<div class="col-lg-4">'
+                        . '<h1 class="entry-title section-title">' . $pages[$key]->post_title . '</h1>'
                         . '</div>'
-                        . '<div class="col-lg-9">'
-                        . ' <div class="entry-content">' . $pages[$key]->post_content . '</div>'
+                        . '<div class="col-lg-8">'
+                        . ' <div class="entry-content">' . substr($pages[$key]->post_content, 0, 20) . '</div>'
                         . '</div>'
                         . '</div><!-- .row -->'
                         . '</div><!-- .content-fluid -->';
@@ -214,18 +224,73 @@ class dro_caterer_frontpage {
     /**
      *  retreive the content of the subpages  only the first level elements
      * @param int $id
-     * @param int $number_subpage The number of the subpage 
+     * @param int $number_subpage The number of the subpage
+     * @return string the title and the content of the subpages
      */
     private function _subpage_content($id, $number_subpage) {
         $out = '';
-        $subpages = get_pages(array(
-            'child_of' => $id,
-            'parent' => $id
+//        $subpages = get_pages(array(
+//            'child_of' => $id,
+//            'parent' => $id
+//        ));
+        $subpages = new WP_Query(array(
+            'post_type' => 'page',
+            'post_parent' => $id,
+            'orderby' => 'rand'
         ));
-        foreach ($subpages as $key => $value) {
-            $out .= '<div class="col-md-6 col-lg-4"><h1>' . $subpages[$key]->post_title . '</h1></div>';
-        }
+        while ($subpages->have_posts()):
+            $subpages->the_post();
+            $out .= '<div class="col-md-6  child-element">';
+            $out .= '<div class="child-element-wrapper">';
+            $out .= '<div class="row">';
+            if (has_post_thumbnail()) {
+                $out .= '<div class="col-md-6"><div class="row">'
+                        . '<div class="col-12">'
+                        . '<h1 class="entry-title">' . get_the_title() . '</h1>'
+                        . '</div><!-- ./ col-12 -->'
+                        . '';
+                $out .= ''
+                        . '<div class="col-12">'
+                        . '<img src="' . get_the_post_thumbnail_url() . '" class="">'
+                        . '</div><!-- ./ col-12 -->'
+                        . '</div></div>';
+            } else {
+                $out .= '<div class="col-md-6">'
+                        . ''
+                        . '<h1 class="entry-title">' . get_the_title() . '</h1>'
+                        . ''
+                        . '</div><!-- ./col-6 -->';                
+            }
+            $out .= '<div class="col-md-6">'
+                    . '<div class="col-12">'
+                    . '<div class="entry-content">' . substr(get_the_excerpt(), 0, 200) . '</div>'
+                    . '</div><!-- ./ col-12 -->'
+                    . '</div>';
+            $out .= '</div><!-- ./ row -->';
+            $out .= '</div><!-- ./ child-element-wrapper -->';
+            $out .= '</div><!-- ./ col-md-6  child-element-->';
+        endwhile;
+        wp_reset_postdata();
+//        foreach ($subpages as $key => $value) {
+//            $out .= '<div class="col-md-6 col-lg-4">'
+//                    . '<div class="row">'
+//                    . '<div class="col-12">'
+//                    . '<h1 class="entry-title">' . $subpages[$key]->post_title . '</h1>'
+//                    . '</div><!-- ./ col-12 -->'
+//                    . '</div><!-- ./ row -->'
+//                    . '<div class="row">'
+//                    . '<div class="col-12">'
+//                    . '<div class="entry-content">' . $subpages[$key]->post_excerpt . '</div>'
+//                    . '</div><!-- ./ col-12 -->'
+//                    . '</div><!-- ./ row -->'
+//                    . '</div><!-- ./ col-md-6 col-lg-4 -->';
+//        }
+
         return $out;
+    }
+
+    private function _the_content($id) {
+        
     }
 
 }

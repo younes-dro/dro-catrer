@@ -8,6 +8,7 @@
  *
  * @package dro_caterer
  */
+
 // Create the Front Page Object 
 global $dro_caterer_frontpage;
 $dro_caterer_frontpage = new dro_caterer_frontpage(get_the_ID());
@@ -35,8 +36,8 @@ if ($dro_caterer_frontpage->has_child === 0)
                             <div class="navbar navbar-inverse navbar-fixed-top">
                                 <div class="navbar-inner">
                                     <nav id="site-navigation" class="main-navigation front-page-navigation" role="navigation">
-                                        <!-- The navigation menu will be placed here using javascript -->
                                         <?php
+                                        
                                         $menu_attributes = array(
                                             'menu_class' => 'menu'
                                         );
