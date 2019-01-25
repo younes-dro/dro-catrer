@@ -174,9 +174,26 @@ class dro_caterer_frontpage {
     private function _construct_content(array $pages) {
 
         foreach ($pages as $key => $value) {
-            // The child page has a children too 
+            
+            /*
+             * Retrieve the featured image (if exists)  and set it as background of the section
+             */
+
+            $background = '';
+            $trans = '';
+            
+            if(has_post_thumbnail($pages[$key]->ID)){
+                
+               $featured_image_url =  get_the_post_thumbnail_url(($pages[$key]->ID));
+               $background = 'style= "background-image : url('.$featured_image_url.')"';
+               $trans = '<div class="trans"></div>';
+            }
+            
+            
+            // If the child page has a children too
             if ($this->_subpage_has_child($pages[$key]->ID) > 0) {
-                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element">'
+                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element" '.$background.'>'
+                        .$trans
                         . '<div class="container-fluid">'
                         . '<div class="row">'
                         . '<div class="col-lg-12">'
@@ -192,7 +209,8 @@ class dro_caterer_frontpage {
                         . '</div><!-- .content-fluid (parent) -->';
                 $this->content .='</section>';
             } else {
-                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element">'
+                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element"'.$background.'>'
+                        .$trans
                         . '<div class="container-fluid">'
                         . '<div class="row">'
                         . '<div class="col-lg-4">'
