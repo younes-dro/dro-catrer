@@ -139,8 +139,8 @@ class dro_caterer_frontpage {
         foreach ($pages as $key => $value) {
             $this->menu .='<li>';
             $this->menu .='<a href="#' . $pages[$key]->post_name . '" title="' .
-                    esc_html__($pages[$key]->post_title, 'dro-caterer') . '">' .
-                    esc_html__($pages[$key]->post_title, 'dro-caterer') . '</a>';
+                    $pages[$key]->post_title . '">' .
+                    $pages[$key]->post_title . '</a>';
             $this->menu .='</li>';
         }
         $this->menu .="</ul>";
@@ -181,7 +181,7 @@ class dro_caterer_frontpage {
                         . '<div class="row">'
                         . '<div class="col-lg-12">'
                         . '<h1 class="entry-title section-title section-title-has-child">' . $pages[$key]->post_title . '</h1>'
-                        . '<div class="entry-content entry-content-has-child">' . substr($pages[$key]->post_content, 0, 20) . '</div>'
+                        . '<div class="entry-content entry-content-has-child">' . substr($pages[$key]->post_content, 0, 100) . '</div>'
                         . '</div>'
                         . '<div class="col-lg-12 children-pages">'
                         . '<div class="row justify-content-center">'
@@ -199,7 +199,7 @@ class dro_caterer_frontpage {
                         . '<h1 class="entry-title section-title">' . $pages[$key]->post_title . '</h1>'
                         . '</div>'
                         . '<div class="col-lg-8">'
-                        . ' <div class="entry-content">' . substr($pages[$key]->post_content, 0, 20) . '</div>'
+                        . '<div class="entry-content">' . substr($pages[$key]->post_content, 0, 100) . '</div>'
                         . '</div>'
                         . '</div><!-- .row -->'
                         . '</div><!-- .content-fluid -->';

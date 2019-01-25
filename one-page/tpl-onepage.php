@@ -5,8 +5,8 @@
  *
  * @package dro_caterer
  */
-//get_header('one-page/header-onepage.php');
-require get_template_directory().'/one-page/header-onepage.php';
+
+get_template_part('one-page/header-onepage');
 ?>
 <div class="container-fluid">
 <div class="row">
