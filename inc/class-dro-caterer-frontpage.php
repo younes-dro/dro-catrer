@@ -175,6 +175,7 @@ class dro_caterer_frontpage {
 
         foreach ($pages as $key => $value) {
             
+//            var_dump($pages[$key]);
             /*
              * Retrieve the featured image (if exists)  and set it as background of the section
              */
@@ -198,7 +199,7 @@ class dro_caterer_frontpage {
                         . '<div class="row">'
                         . '<div class="col-lg-12">'
                         . '<h1 class="entry-title section-title section-title-has-child">' . $pages[$key]->post_title . '</h1>'
-                        . '<div class="entry-content entry-content-has-child">' . substr($pages[$key]->post_content, 0, 100) . '</div>'
+                        . '<div class="entry-content entry-content-has-child">' . substr($pages[$key]->post_content, 0, 250) . '</div>'
                         . '</div>'
                         . '<div class="col-lg-12 children-pages">'
                         . '<div class="row justify-content-center">'
@@ -213,11 +214,14 @@ class dro_caterer_frontpage {
                         .$trans
                         . '<div class="container-fluid">'
                         . '<div class="row">'
-                        . '<div class="col-lg-4">'
+                        . '<div class="col-lg-5">'
                         . '<h1 class="entry-title section-title">' . $pages[$key]->post_title . '</h1>'
                         . '</div>'
-                        . '<div class="col-lg-8">'
-                        . '<div class="entry-content">' . substr($pages[$key]->post_content, 0, 100) . '</div>'
+                        . '<div class="col-lg-7">'
+                        . '<div class="entry-content">'
+                        . substr($pages[$key]->post_content,0,250)
+//                        . '<span> .. more </span>'
+                        . '</div>'
                         . '</div>'
                         . '</div><!-- .row -->'
                         . '</div><!-- .content-fluid -->';
@@ -262,7 +266,7 @@ class dro_caterer_frontpage {
             $out .= '<div class="child-element-wrapper">';
             $out .= '<div class="row">';
             if (has_post_thumbnail()) {
-                $out .= '<div class="col-md-6"><div class="row">'
+                $out .= '<div class="col-md-4"><div class="row">'
                         . '<div class="col-12">'
                         . '<h1 class="entry-title">' . get_the_title() . '</h1>'
                         . '</div><!-- ./ col-12 -->'
@@ -273,13 +277,13 @@ class dro_caterer_frontpage {
                         . '</div><!-- ./ col-12 -->'
                         . '</div></div>';
             } else {
-                $out .= '<div class="col-md-6">'
+                $out .= '<div class="col-md-4">'
                         . ''
                         . '<h1 class="entry-title">' . get_the_title() . '</h1>'
                         . ''
                         . '</div><!-- ./col-6 -->';                
             }
-            $out .= '<div class="col-md-6">'
+            $out .= '<div class="col-md-8">'
                     . '<div class="col-12">'
                     . '<div class="entry-content">' . substr(get_the_excerpt(), 0, 200) . '</div>'
                     . '</div><!-- ./ col-12 -->'
