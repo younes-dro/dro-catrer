@@ -174,7 +174,7 @@ class dro_caterer_frontpage {
     private function _construct_content(array $pages) {
 
         foreach ($pages as $key => $value) {
-            
+
 //            var_dump($pages[$key]);
             /*
              * Retrieve the featured image (if exists)  and set it as background of the section
@@ -182,19 +182,22 @@ class dro_caterer_frontpage {
 
             $background = '';
             $trans = '';
-            
-            if(has_post_thumbnail($pages[$key]->ID)){
-                
-               $featured_image_url =  get_the_post_thumbnail_url(($pages[$key]->ID));
-               $background = 'style= "background-image : url('.$featured_image_url.')"';
-               $trans = '<div class="trans"></div>';
+            $class_has_not_thumbnail = '';
+
+            if (has_post_thumbnail($pages[$key]->ID)) {
+
+                $featured_image_url = get_the_post_thumbnail_url(($pages[$key]->ID));
+                $background = 'style= "background-image : url(' . $featured_image_url . ')"';
+                $trans = '<div class="trans"></div>';
+            } else {
+                $class_has_not_thumbnail = 'has-not-thumbnail';
             }
-            
-            
+
+
             // If the child page has a children too
             if ($this->_subpage_has_child($pages[$key]->ID) > 0) {
-                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element" '.$background.'>'
-                        .$trans
+                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element page-has-child" ' . $background . '>'
+                        . $trans
                         . '<div class="container-fluid">'
                         . '<div class="row">'
                         . '<div class="col-lg-12">'
@@ -210,8 +213,10 @@ class dro_caterer_frontpage {
                         . '</div><!-- .content-fluid (parent) -->';
                 $this->content .='</section>';
             } else {
-                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element"'.$background.'>'
-                        .$trans
+                $this->content .= '<section id="' . $pages[$key]->post_name . '" '
+                        . 'class="element ' . $class_has_not_thumbnail . '"'
+                        . $background . '>'
+                        . $trans
                         . '<div class="container-fluid">'
                         . '<div class="row">'
                         . '<div class="col-lg-5">'
@@ -219,7 +224,7 @@ class dro_caterer_frontpage {
                         . '</div>'
                         . '<div class="col-lg-7">'
                         . '<div class="entry-content">'
-                        . substr($pages[$key]->post_content,0,250)
+                        . substr($pages[$key]->post_content, 0, 250)
 //                        . '<span> .. more </span>'
                         . '</div>'
                         . '</div>'
@@ -251,10 +256,6 @@ class dro_caterer_frontpage {
      */
     private function _subpage_content($id, $number_subpage) {
         $out = '';
-//        $subpages = get_pages(array(
-//            'child_of' => $id,
-//            'parent' => $id
-//        ));
         $subpages = new WP_Query(array(
             'post_type' => 'page',
             'post_parent' => $id,
@@ -262,32 +263,23 @@ class dro_caterer_frontpage {
         ));
         while ($subpages->have_posts()):
             $subpages->the_post();
-            $out .= '<div class="col-md-6  child-element">';
+            $out .= '<div class="col-md-4  child-element">';
             $out .= '<div class="child-element-wrapper">';
             $out .= '<div class="row">';
+            $out .= ''
+                    . '<div class="col-12">'
+                    . '<h1 class="entry-title">' . get_the_title() . '</h1>'
+                    . '</div><!-- ./ col-12 -->'
+                    . '';
             if (has_post_thumbnail()) {
-                $out .= '<div class="col-md-4"><div class="row">'
-                        . '<div class="col-12">'
-                        . '<h1 class="entry-title">' . get_the_title() . '</h1>'
-                        . '</div><!-- ./ col-12 -->'
-                        . '';
                 $out .= ''
+                        . ''
                         . '<div class="col-12">'
                         . '<img src="' . get_the_post_thumbnail_url() . '" class="">'
                         . '</div><!-- ./ col-12 -->'
-                        . '</div></div>';
-            } else {
-                $out .= '<div class="col-md-4">'
-                        . ''
-                        . '<h1 class="entry-title">' . get_the_title() . '</h1>'
-                        . ''
-                        . '</div><!-- ./col-6 -->';                
+                        . '';
             }
-            $out .= '<div class="col-md-8">'
-                    . '<div class="col-12">'
-                    . '<div class="entry-content">' . substr(get_the_excerpt(), 0, 200) . '</div>'
-                    . '</div><!-- ./ col-12 -->'
-                    . '</div>';
+
             $out .= '</div><!-- ./ row -->';
             $out .= '</div><!-- ./ child-element-wrapper -->';
             $out .= '</div><!-- ./ col-md-6  child-element-->';
