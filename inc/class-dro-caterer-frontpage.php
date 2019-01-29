@@ -173,9 +173,9 @@ class dro_caterer_frontpage {
      */
     private function _construct_content(array $pages) {
 
-        foreach ($pages as $key => $value) {
+        foreach ($pages as $page) {
 
-//            var_dump($pages[$key]);
+//            var_dump($value);
             /*
              * Retrieve the featured image (if exists)  and set it as background of the section
              */
@@ -184,9 +184,9 @@ class dro_caterer_frontpage {
             $trans = '';
             $class_has_not_thumbnail = '';
 
-            if (has_post_thumbnail($pages[$key]->ID)) {
+            if (has_post_thumbnail($page->ID)) {
 
-                $featured_image_url = get_the_post_thumbnail_url(($pages[$key]->ID));
+                $featured_image_url = get_the_post_thumbnail_url(($page->ID));
                 $background = 'style= "background-image : url(' . $featured_image_url . ')"';
                 $trans = '<div class="trans"></div>';
             } else {
@@ -195,37 +195,40 @@ class dro_caterer_frontpage {
 
 
             // If the child page has a children too
-            if ($this->_subpage_has_child($pages[$key]->ID) > 0) {
-                $this->content .= '<section id="' . $pages[$key]->post_name . '" class="element page-has-child" ' . $background . '>'
+            if ($this->_subpage_has_child($page->ID) > 0) {
+                $this->content .= '<section id="' . $page->post_name . '" class="element page-has-child" ' . $background . '>'
                         . $trans
                         . '<div class="container-fluid">'
                         . '<div class="row">'
                         . '<div class="col-lg-12">'
-                        . '<h1 class="entry-title section-title section-title-has-child">' . $pages[$key]->post_title . '</h1>'
-                        . '<div class="entry-content entry-content-has-child">' . substr($pages[$key]->post_content, 0, 250) . '</div>'
+                        . '<h1 class="entry-title section-title section-title-has-child">' . $page->post_title . '</h1>'
+                        . '<div class="entry-content entry-content-has-child">' . substr($page->post_content, 0, 250) . '</div>'
                         . '</div>'
                         . '<div class="col-lg-12 children-pages">'
                         . '<div class="row justify-content-center">'
-                        . $this->_subpage_content($pages[$key]->ID, $this->_subpage_has_child($pages[$key]->ID))
+                        . $this->_subpage_content($page->ID, $this->_subpage_has_child($page->ID))
                         . '</div><!-- .row (child ) -->'
                         . '</div><!-- .col-lg-12 (child) -->'
                         . '</div><!-- .row (parent) -->'
                         . '</div><!-- .content-fluid (parent) -->';
                 $this->content .='</section>';
             } else {
-                $this->content .= '<section id="' . $pages[$key]->post_name . '" '
+                
+                $content_parts = get_extended($page->post_content);
+
+                $this->content .= '<section id="' . $page->post_name . '" '
                         . 'class="element ' . $class_has_not_thumbnail . '"'
                         . $background . '>'
                         . $trans
                         . '<div class="container-fluid">'
                         . '<div class="row">'
                         . '<div class="col-lg-5">'
-                        . '<h1 class="entry-title section-title">' . $pages[$key]->post_title . '</h1>'
+                        . '<h1 class="entry-title section-title">' . $page->post_title . '</h1>'
                         . '</div>'
                         . '<div class="col-lg-7">'
                         . '<div class="entry-content">'
-                        . substr($pages[$key]->post_content, 0, 250)
-//                        . '<span> .. more </span>'
+                        // Display the text before the more tag
+                        . $content_parts['main']
                         . '</div>'
                         . '</div>'
                         . '</div><!-- .row -->'
