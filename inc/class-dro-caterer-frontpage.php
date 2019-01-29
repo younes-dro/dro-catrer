@@ -192,7 +192,7 @@ class dro_caterer_frontpage {
             } else {
                 $class_has_not_thumbnail = 'has-not-thumbnail';
             }
-
+            $content_parts = get_extended($page->post_content);
 
             // If the child page has a children too
             if ($this->_subpage_has_child($page->ID) > 0) {
@@ -202,20 +202,18 @@ class dro_caterer_frontpage {
                         . '<div class="row">'
                         . '<div class="col-lg-12">'
                         . '<h1 class="entry-title section-title section-title-has-child">' . $page->post_title . '</h1>'
-                        . '<div class="entry-content entry-content-has-child">' . substr($page->post_content, 0, 250) . '</div>'
-                        . '</div>'
+                        . '<div class="entry-content entry-content-has-child">' . $content_parts['main'] . '</div>'
+                        . $this->_more_tag_link($page->ID)
+                        . '</div><!-- .col-lg-12-->'
                         . '<div class="col-lg-12 children-pages">'
                         . '<div class="row justify-content-center">'
-                        . $this->_subpage_content($page->ID, $this->_subpage_has_child($page->ID))
+                        . $this->_subpage_content($page->ID)
                         . '</div><!-- .row (child ) -->'
                         . '</div><!-- .col-lg-12 (child) -->'
                         . '</div><!-- .row (parent) -->'
                         . '</div><!-- .content-fluid (parent) -->';
                 $this->content .='</section>';
             } else {
-                
-                $content_parts = get_extended($page->post_content);
-
                 $this->content .= '<section id="' . $page->post_name . '" '
                         . 'class="element ' . $class_has_not_thumbnail . '"'
                         . $background . '>'
@@ -224,13 +222,14 @@ class dro_caterer_frontpage {
                         . '<div class="row">'
                         . '<div class="col-lg-5">'
                         . '<h1 class="entry-title section-title">' . $page->post_title . '</h1>'
-                        . '</div>'
+                        . '</div><!-- .col-lg-5 -->'
                         . '<div class="col-lg-7">'
                         . '<div class="entry-content">'
                         // Display the text before the more tag
                         . $content_parts['main']
-                        . '</div>'
-                        . '</div>'
+                        . $this->_more_tag_link($page->ID)
+                        . '</div><!-- .entry-content -->'
+                        . '</div><!-- .col-lg-7 -->'
                         . '</div><!-- .row -->'
                         . '</div><!-- .content-fluid -->';
                 $this->content .='</section>';
@@ -241,8 +240,20 @@ class dro_caterer_frontpage {
     }
 
     /**
+     * Display the more tag
+     * 
+     * @param int $id the page ID
+     * @return string the more tag link
+     */
+    private function _more_tag_link($id) {
+        return '<h2><a class="read-more" '
+                . 'title="' . esc_html__('Read More', 'dro-caterer')
+                . '" href="' . get_page_link($id) . '#post-' . $id . '">[...]</a></h2>';
+    }
+
+    /**
      * Verfy if a child page has children too
-     * @param int $id
+     * @param int $id the page ID
      */
     private function _subpage_has_child($id) {
         return count(get_pages(array(
@@ -254,10 +265,9 @@ class dro_caterer_frontpage {
     /**
      *  retreive the content of the subpages  only the first level elements
      * @param int $id
-     * @param int $number_subpage The number of the subpage
      * @return string the title and the content of the subpages
      */
-    private function _subpage_content($id, $number_subpage) {
+    private function _subpage_content($id) {
         $out = '';
         $subpages = new WP_Query(array(
             'post_type' => 'page',
@@ -272,42 +282,24 @@ class dro_caterer_frontpage {
             $out .= ''
                     . '<div class="col-12">'
                     . '<h1 class="entry-title">' . get_the_title() . '</h1>'
-                    . '</div><!-- ./ col-12 -->'
+                    . '</div><!-- .col-12 -->'
                     . '';
             if (has_post_thumbnail()) {
                 $out .= ''
                         . ''
                         . '<div class="col-12">'
                         . '<img src="' . get_the_post_thumbnail_url() . '" class="">'
-                        . '</div><!-- ./ col-12 -->'
+                        . '</div><!-- .col-12 -->'
                         . '';
             }
 
-            $out .= '</div><!-- ./ row -->';
-            $out .= '</div><!-- ./ child-element-wrapper -->';
-            $out .= '</div><!-- ./ col-md-6  child-element-->';
+            $out .= '</div><!-- .row -->';
+            $out .= '</div><!-- .child-element-wrapper -->';
+            $out .= '</div><!-- .col-md-6  child-element-->';
         endwhile;
         wp_reset_postdata();
-//        foreach ($subpages as $key => $value) {
-//            $out .= '<div class="col-md-6 col-lg-4">'
-//                    . '<div class="row">'
-//                    . '<div class="col-12">'
-//                    . '<h1 class="entry-title">' . $subpages[$key]->post_title . '</h1>'
-//                    . '</div><!-- ./ col-12 -->'
-//                    . '</div><!-- ./ row -->'
-//                    . '<div class="row">'
-//                    . '<div class="col-12">'
-//                    . '<div class="entry-content">' . $subpages[$key]->post_excerpt . '</div>'
-//                    . '</div><!-- ./ col-12 -->'
-//                    . '</div><!-- ./ row -->'
-//                    . '</div><!-- ./ col-md-6 col-lg-4 -->';
-//        }
 
         return $out;
-    }
-
-    private function _the_content($id) {
-        
     }
 
 }
