@@ -12,14 +12,12 @@ A starter theme called dro caterer.
 == Description ==
 
 This theme allows you the convert your existance pages to a One page style .
-here is the steps : 
-1- Create a page (e.g Front Page ) and set Template to caterer One Page  and define it as static page in options reading 
-2- Create  a child pages -or use existentes pages) and define it as a child of static page ( Front Page)
+her is the steps : 
+1- Create a page (e.g Front Page ) and set Template to tpl-onepage  and define it as static page in options reading 
+2- Create  a child pages or use existentes pages of the static page ( Front Page)
 and that s  it !
-le systeme d 'affichge :
-1- the navigation menu will be generated based on the child pages.
-2 - if a child page is also a parent page, it child page will be displayed theire title and thumbnail image
-3 - the direct child page  : don t forget to add more link tag for page
+the navigation menu will be generated based on the child pages.
+if a child page is also a parent page, it child page will be displayed to 
 
 == Installation ==
 

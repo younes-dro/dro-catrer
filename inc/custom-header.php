@@ -102,7 +102,8 @@ if (!function_exists('dro_caterer_custom_logo()')) {
             }
 
             // Get the image
-            $html = sprintf('<a href="' . esc_url(home_url()) . '" title="' . esc_html__('Traiteur à Domicile', 'dro-caterer') . '" class="custom-logo-link" rel="home" itemprop="url">%1$s</span>', wp_get_attachment_image($custom_logo_id, 'full', false, $custom_logo_attr)
+            $html = sprintf('<a href="' . esc_url(home_url()) . '"'
+                    . 'class="custom-logo-link" rel="home" itemprop="url">%1$s</a>', wp_get_attachment_image($custom_logo_id, 'full', false, $custom_logo_attr)
             );
         }
 

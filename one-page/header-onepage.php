@@ -33,9 +33,9 @@ if ($dro_caterer_frontpage->has_child === 0)
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="navbar navbar-inverse ">
+                            <div class="navbar navbar-inverse navbar-fixed-top">
                                 <div class="navbar-inner">
-                                    <nav id="site-navigation" class="main-navigation front-page-navigation sticky-active" role="navigation">
+                                    <nav id="site-navigation" class="main-navigation front-page-navigation" role="navigation">
                                         <?php
                                         
                                         $menu_attributes = array(
